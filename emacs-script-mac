@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# OPTION="--debug-init"
+# xprop -name Emacs >/dev/null 2>/dev/null
+# if [ "$?" = "1" ]; then
+#     OPTION="$OPTION -c"
+# fi
+# 
+# xhost +si:localuser:$( whoami ) >&/dev/null && {
+#     OPTION="$OPTION -n"
+# } || {
+#      OPTION="$OPTION -t"
+# }
+# 
+# emacsclient $OPTION -a "" "$@"
+
+/Applications/EmacsClient.app/Contents/MacOS/applet
+OPTION=""
+SESSION=`/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -e '(<= 2 (length (visible-frame-list)))'`
+if [ "$SESSION" = "nil" ]; then
+     OPTION="$OPTION -c"
+fi
+/Applications/Emacs.app/Contents/MacOS/bin/emacsclient $OPTION -n  "$@"
