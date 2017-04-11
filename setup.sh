@@ -8,5 +8,6 @@ for f in $FILES; do
 		mkdir -p $BACKUP
 		mv $HOME/$LINK $BACKUP/$f
 	fi
-	ln -s $SCRIPT_PATH/$f $HOME/$LINK
+	#ln -s $SCRIPT_PATH/$f $HOME/$LINK
+	cp -rf $SCRIPT_PATH/$f $HOME/$LINK
 done
