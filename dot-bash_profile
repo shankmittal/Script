@@ -2,16 +2,16 @@ source ~/.git-completion.bash
 #---------
 # PATH
 #---------
-export PATH="/usr2/mittals/.linuxbrew/bin:$PATH"
-export MANPATH="/usr2/mittals/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="/usr2/mittals/.linuxbrew/share/info:$INFOPATH"
+export PATH="/usr2/shankmittal/.linuxbrew/bin:$PATH"
+export MANPATH="/usr2/shankmittal/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="/usr2/shankmittal/.linuxbrew/share/info:$INFOPATH"
 
-export PATH=/sbin:/usr/sbin:~/bin:/pkg/qct/software/gnu/gperf/3.0.3/bin:/pkg/gnu/make/3.81/bin:/usr/bin:/prj/l4linux/git/bin:/pkg/asw/tools/bin:${PATH}:/pkg/qct/software/python/2.4.5/bin:/pkg/qct/software/crm/bin:/usr2/mittals/scripts
+export PATH=/sbin:/usr/sbin:~/bin:/pkg/qct/software/gnu/gperf/3.0.3/bin:/pkg/gnu/make/3.81/bin:/usr/bin:/prj/l4linux/git/bin:/pkg/asw/tools/bin:${PATH}:/pkg/qct/software/python/2.4.5/bin:/pkg/qct/software/crm/bin:/usr2/shankmittal/scripts
 
-export MITTALS_LINUX_PATH=$HOME/opt/qemu-linaro-aarch4/bin:$HOME/opt/qemu-linaro/bin/:$HOME/opt/ctags/bin:$HOME/opt/emacs-git/bin:/usr/local/bin:/local/mnt/workspace/mittals/android-sdk-linux/platform-tools
+export MITTALS_LINUX_PATH=$HOME/opt/qemu-linaro-aarch4/bin:$HOME/opt/qemu-linaro/bin/:$HOME/opt/ctags/bin:$HOME/opt/emacs-git/bin:/usr/local/bin:/local/mnt/workspace/shankmittal/android-sdk-linux/platform-tools
 
 case "$HOSTNAME" in
-   mittals-linux)
+   shankmittal-linux)
        export PATH=$MITTALS_LINUX_PATH:$PATH
    ;;
 esac
@@ -31,8 +31,8 @@ alias grep="grep --color -n"
 alias xt="/usr/bin/xterm -ah -bg Black -fg Green -ls -sb -sl 500 -geom 80x24+0+0 -T \"ssh $(hostname)\"  -fa 'Courier New:family=ru' -fs 12 &"
 #alias xt="xterm -ah -bg green -fg white  -ls -T \"$(hostname)\"  -fa 'Courier New:family=ru' -fs 14 &"
 alias gt="gnome-terminal --working-directory=$PWD"
-alias home="cd /local/mnt/workspace/mittals/"
-alias home2="cd /local/mnt2/workspace/mittals/"
+alias home="cd /local/mnt/workspace/shankmittal/"
+alias home2="cd /local/mnt2/workspace/shankmittal/"
 alias email_quic="git config user.email $(whoami)@quicinc.com"
 alias email_ca="git config user.email $(whoami)@codeaurora.org"
 alias repo_pj="git config --get remote.quic.projectname"
@@ -50,14 +50,21 @@ alias gb="git branch"
 alias gct="git describe --abbrev=0 --tags"
 alias gfxm="git config core.filemode false"
 alias e="$HOME/emacs-script"
+alias re="$HOME/re"
 
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PERL=/usr/bin/perl
 
-PS1="\[$(tput setaf 1)\]\u@\h:$NC[\[$(tput setaf 4)\]\W\[$(tput setaf 1)\]] #\[$(tput sgr0)\] "
+PS1="\[$(tput setaf 1)\]\h:$NC[\[$(tput setaf 4)\]\W\[$(tput setaf 1)\]] #\[$(tput sgr0)\] "
 PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME}: [`basename ${PWD}`] ${PWD}\007"'
 
 source ~/host.sh
 source ~/envsetup.sh
 source ~/adb.bash
 source ~/fastboot.bash
+
+export PATH=$HOME/android-sdk/platform-tools:$PATH
+export PATH=$HOME/opt/emacs-git/bin:$PATH
+export CATALINA_HOME=/opt/tomcat
+
+export ARMLMD_LICENSE_FILE=8224@armlic.building8.com

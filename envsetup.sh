@@ -1305,6 +1305,14 @@ function f() {
     find . -name "$1"
 }
 
+function rf() {
+    if [[ -z "$1" ]]; then
+        echo "Usage: rf <filename>"
+        return
+    fi
+    find . -name "*$1*"
+}
+
 function v() {
     if [[ -z "$1" ]]; then
         echo "Usage: v <regex>"
@@ -1373,13 +1381,33 @@ function reposync() {
 
 function repostart() {
     DATE=`date +"%b-%d"`
-    echo "Starting tracking branch: $DATE"
-    if [[ -z "$1" ]]; then
-        repo start $DATE --all
-        return
+    PROJECT='--all'
+    SUFFIX=''
+    BRANCH=$DATE
+
+    while [[ $# -gt 1 ]]
+    do
+    key="$1"
+
+    case $key in
+        -s|--suffix)
+            SUFFIX="$2"
+            shift # past argument
+        ;;
+        *)
+            PROJECT=$key
+        ;;
+    esac
+    shift # past argument or value
+    done
+
+    if [ ! $SUFFIX == '' ]; then
+        BRANCH=$SUFFIX-$BRANCH
     fi
 
-    repo start $DATE $1
+    echo "Starting tracking branch: $BRANCH PROJECT=$PROJECT"
+
+    repo start $BRANCH $PROJECT
 }
 
 function repoisync() {
