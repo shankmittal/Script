@@ -1,0 +1,68 @@
+[ -z "$PS1" ] && return
+
+source $HOME/path.sh
+
+#---------
+# ALIAS
+#---------
+alias ls="ls --color"
+alias ll="ls -ahl --color"
+alias uim="gvim -U ~/.uvimrc \"+syntax on\" \"+set nu\""
+alias uim="gvim --servername $USER-GVIM --remote-tab -U ~/.uvimrc \"+syntax on\" \"+set nu\""
+alias grep="grep --color -n"
+alias gt="gnome-terminal --working-directory=$PWD"
+alias home="cd /Volumes/aloha"
+alias home2="cd /local/mnt2/workspace/mittals/"
+alias email_quic="git config user.email $(whoami)@quicinc.com"
+alias email_ca="git config user.email $(whoami)@codeaurora.org"
+alias repo_pj="git config --get remote.quic.projectname"
+alias remote="ssh droidbi02"
+
+alias gs="git status"
+alias gl="git log --oneline"
+alias gll="git log"
+alias glr="git log --oneline --reverse"
+alias gllr="git log --reverse"
+alias gc="git commit"
+alias gd="git diff"
+alias gdc="git diffi --cached"
+alias gb="git branch"
+alias gct="git describe --abbrev=0 --tags"
+alias gfxm="git config core.filemode false"
+alias e="$HOME/emacs-script"
+
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+export PERL=/usr/bin/perl
+
+PS1="\[$(tput setaf 1)\]\h:$NC[\[$(tput setaf 4)\]\W\[$(tput setaf 1)\]] #\[$(tput sgr0)\] "
+PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME}: [`basename ${PWD}`] ${PWD}\007"'
+
+source ~/host.sh
+source ~/envsetup.sh
+source ~/adb.bash
+source ~/fastboot.bash
+
+# This is a unique port forward duplet for SSH connection with
+# shankmittal-linux. Please see ~/.ssh/config
+[ -z "$LC_SSH_FWINFO" ] && export LC_SSH_FWINFO="9004:9005"
+
+export JAVA_HOME=`/usr/libexec/java_home`
+alias sws="ssh -N -f -o \"ExitOnForwardFailure yes\"  ws-port"
+alias sp="ssh -N -f -o \"ExitOnForwardFailure yes\""
+function maue() { ( cd $HOME/fbsource/fbandroid && ~/fbsource/fbandroid/tools/aloha/maui/maui-global.js $@ ); }
+# added by Anaconda3 2018.12 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/Users/shankmittal/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/Users/shankmittal/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/shankmittal/anaconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/Users/shankmittal/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<
