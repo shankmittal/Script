@@ -1,5 +1,7 @@
 [ -z "$PS1" ] && return
 
+
+DIR="$HOME/opt/scripts/"
 source $HOME/path.sh
 
 #---------
@@ -30,6 +32,7 @@ alias gb="git branch"
 alias gct="git describe --abbrev=0 --tags"
 alias gfxm="git config core.filemode false"
 alias e="$HOME/emacs-script"
+alias sws="ssh -N -f -o \"ExitOnForwardFailure yes\"  ws-port"
 
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 export PERL=/usr/bin/perl
@@ -37,14 +40,14 @@ export PERL=/usr/bin/perl
 PS1="\[$(tput setaf 1)\]\h:$NC[\[$(tput setaf 4)\]\W\[$(tput setaf 1)\]] #\[$(tput sgr0)\] "
 PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME}: [`basename ${PWD}`] ${PWD}\007"'
 
-source ~/host.sh
-source ~/envsetup.sh
-source ~/adb.bash
-source ~/fastboot.bash
+source $DIR/host.sh
+source $DIR/envsetup.sh
+source $DIR/adb.bash
+source $DIR/fastboot.bash
 
 # This is a unique port forward duplet for SSH connection with
 # shankmittal-linux. Please see ~/.ssh/config
-[ -z "$LC_SSH_FWINFO" ] && export LC_SSH_FWINFO="9004:9005"
+[ -z "$LC_SSH_FWINFO" ] && export LC_SSH_FWINFO="9000:9001:shankmittal-mbp"
 
 export JAVA_HOME=`/usr/libexec/java_home`
 alias sws="ssh -N -f -o \"ExitOnForwardFailure yes\"  ws-port"
@@ -62,6 +65,25 @@ else
         CONDA_CHANGEPS1=false conda activate base
     else
         \export PATH="/Users/shankmittal/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<
+
+# mount the android file image
+mountAndroid() { hdiutil attach ~/android.dmg.sparseimage -mountpoint /Volumes/android; }
+# added by Anaconda3 2019.10 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/Users/shankmittal/opt/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/Users/shankmittal/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/shankmittal/opt/anaconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/Users/shankmittal/opt/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
